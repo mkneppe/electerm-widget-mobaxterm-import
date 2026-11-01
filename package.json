@@ -1,0 +1,35 @@
+{
+  "name": "mobaxterm-import",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Import MobaXterm sessions as electerm bookmarks",
+  "main": "main.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test test.js"
+  },
+  "electerm": {
+    "id": "mobaxterm-import",
+    "name": "MobaXterm Import",
+    "description": "Reads MobaXterm sessions (MobaXterm.ini or an exported .mxtsessions file) and offers them as bookmarks: SSH, SFTP, Telnet, RDP and VNC, folders become bookmark groups. Nothing is added until you press \"Import bookmarks\". Needs electerm with widget bookmark offers.",
+    "version": "1.0.0",
+    "type": "frontend",
+    "submitLabel": "Read sessions",
+    "persist": true,
+    "configs": [
+      {
+        "name": "file",
+        "label": "MobaXterm file",
+        "type": "file",
+        "description": "MobaXterm.ini or a .mxtsessions export. Empty: %APPDATA%\\MobaXterm\\MobaXterm.ini (installed MobaXterm, the portable one keeps it next to its exe)."
+      },
+      {
+        "name": "group",
+        "label": "Bookmark group",
+        "type": "string",
+        "placeholder": "MobaXterm <date>",
+        "description": "New group that takes the sessions, MobaXterm folders become subgroups."
+      }
+    ]
+  }
+}
