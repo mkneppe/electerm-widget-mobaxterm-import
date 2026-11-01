@@ -96,6 +96,13 @@ describe('mobaxterm import', () => {
     assert.deepEqual(ids(a), ['rdp-a'])
   })
 
+  test('a single space is an empty field', () => {
+    const b = parseMobaSession('x', ssh('h%22%u%%0%0%%%22%%0%0%0% %%-1'))
+    assert.equal(b.authType, 'password')
+    assert.equal(b.privateKeyPath, undefined)
+    assert.equal(parseMobaSession('y', ssh('h%22% u %', ' ')).username, 'u')
+  })
+
   test('unsupported or empty sessions', () => {
     assert.equal(parseMobaSession('x', ''), null)
     assert.equal(parseMobaSession('x', '#109#0%%22%' + term), null)

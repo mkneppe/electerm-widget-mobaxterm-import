@@ -29,8 +29,9 @@ const pathVars = [
   [/^_CurrentDrive_:?/, 'C:']
 ]
 
+// MobaXterm writes a single space for some empty fields (key path, comment)
 function unescape (s = '') {
-  return s.replace(/__[A-Z]+__/g, m => escapes[m] ?? m)
+  return s.replace(/__[A-Z]+__/g, m => escapes[m] ?? m).trim()
 }
 
 function keyPath (s) {
@@ -46,8 +47,9 @@ function port (s, def) {
 const on = s => s === '-1'
 
 function auth (key) {
-  return key
-    ? { authType: 'privateKey', privateKeyPath: keyPath(key) }
+  const p = keyPath(key)
+  return p
+    ? { authType: 'privateKey', privateKeyPath: p }
     : { authType: 'password' }
 }
 
